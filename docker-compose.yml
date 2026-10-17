@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  ollama:
+    image: alpine/ollama
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+    entrypoint: ["/bin/sh", "-c", "ollama serve & sleep 3 && ollama pull gemma3:270m && wait"]
+
+volumes:
+  ollama_data:
+    name: ollama_data

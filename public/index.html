@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f6f2">
+    <title>Studyforge — Assessment builder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="/" aria-label="Studyforge home">
+            <span class="brand-mark" aria-hidden="true">s</span>
+            <span>studyforge</span>
+        </a>
+        <span class="topbar-note"><span class="status-dot"></span> Assessment tools for educators</span>
+    </header>
+
+    <main class="page-shell">
+        <section class="intro">
+            <p class="eyebrow">YOUR CLASSROOM, YOUR ASSESSMENT</p>
+            <h1>Build a test that’s<br><span>ready for class.</span></h1>
+            <p class="intro-copy">Create a classroom-ready assessment from your course material. Review it, then download a print-ready PDF for your students.</p>
+        </section>
+
+        <div class="workspace">
+            <form class="builder-card" id="question-form">
+                <div class="card-heading">
+                    <div>
+                        <p class="step-label">ASSESSMENT DETAILS</p>
+                        <h2>Set up your test</h2>
+                    </div>
+                    <span class="heading-icon" aria-hidden="true">✳</span>
+                </div>
+
+                <div class="assessment-meta">
+                    <div class="meta-field">
+                        <label class="field-label" for="assessment-title">Assessment title <span class="required-mark">*</span></label>
+                        <input class="text-input" id="assessment-title" name="assessmentTitle" maxlength="100" placeholder="e.g. Unit 3: Cell Biology" required>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-field">
+                            <label class="field-label" for="course">Course or subject <span class="optional-label">Optional</span></label>
+                            <input class="text-input" id="course" name="course" maxlength="80" placeholder="e.g. Biology 101">
+                        </div>
+                        <div class="meta-field">
+                            <label class="field-label" for="grade-level">Grade or level <span class="optional-label">Optional</span></label>
+                            <input class="text-input" id="grade-level" name="gradeLevel" maxlength="50" placeholder="e.g. Grade 10">
+                        </div>
+                    </div>
+                </div>
+
+                <label class="field-label" for="chapter">Source material <span class="required-mark">*</span></label>
+                <textarea id="chapter" name="chapter" rows="6" placeholder="Paste lecture notes, a chapter excerpt, learning objectives, or enter a topic. Questions will be based on this material." required></textarea>
+                <p class="field-hint">For the most accurate questions, provide the course material or learning objectives.</p>
+
+                <label class="field-label instructions-label" for="instructions">Instructions for students <span class="optional-label">Optional</span></label>
+                <textarea class="instructions-input" id="instructions" name="instructions" rows="2" maxlength="500" placeholder="e.g. Answer all questions. Choose one answer for each multiple-choice question."></textarea>
+
+                <fieldset class="question-types">
+                    <legend>Question types <span>Choose how many of each</span></legend>
+                    <div class="type-row">
+                        <div class="type-info">
+                            <span class="type-icon icon-violet" aria-hidden="true">A·B</span>
+                            <span><strong>Multiple choice</strong><small>Four options per question</small></span>
+                        </div>
+                        <label class="count-control">
+                            <span class="sr-only">Number of multiple-choice questions</span>
+                            <input name="mcq" type="number" min="0" max="50" step="1" value="5">
+                            <span>questions</span>
+                        </label>
+                    </div>
+                    <div class="type-row">
+                        <div class="type-info">
+                            <span class="type-icon icon-orange" aria-hidden="true">Aa</span>
+                            <span><strong>Short answer</strong><small>Quick recall and key ideas</small></span>
+                        </div>
+                        <label class="count-control">
+                            <span class="sr-only">Number of short-answer questions</span>
+                            <input name="short_question" type="number" min="0" max="50" step="1" value="3">
+                            <span>questions</span>
+                        </label>
+                    </div>
+                    <div class="type-row">
+                        <div class="type-info">
+                            <span class="type-icon icon-green" aria-hidden="true">¶</span>
+                            <span><strong>Long answer</strong><small>Explain, connect, and explore</small></span>
+                        </div>
+                        <label class="count-control">
+                            <span class="sr-only">Number of long-answer questions</span>
+                            <input name="long_question" type="number" min="0" max="50" step="1" value="1">
+                            <span>questions</span>
+                        </label>
+                    </div>
+                </fieldset>
+
+                <div class="difficulty-field">
+                    <label class="field-label" for="difficulty">Assessment difficulty</label>
+                    <select id="difficulty" name="difficulty">
+                        <option value="easy">Foundational</option>
+                        <option value="medium" selected>Intermediate</option>
+                        <option value="hard">Advanced</option>
+                    </select>
+                </div>
+
+                <button class="submit-button" type="submit">
+                    <span class="button-label">Generate assessment</span>
+                    <span class="button-arrow" aria-hidden="true">→</span>
+                </button>
+                <p class="form-footnote">Review AI-generated questions before administering the assessment.</p>
+            </form>
+
+            <section class="result-card" aria-labelledby="result-title">
+                <div class="result-heading">
+                    <div>
+                        <p class="step-label">ASSESSMENT PREVIEW</p>
+                        <h2 id="result-title">Your test will appear here.</h2>
+                    </div>
+                    <span class="result-icon" aria-hidden="true">✎</span>
+                </div>
+                <div class="result-content" id="result-content" aria-live="polite">
+                    <div class="empty-state">
+                        <div class="empty-illustration" aria-hidden="true">
+                            <span class="paper paper-back"></span>
+                            <span class="paper paper-front"><i></i><i></i><i></i></span>
+                            <span class="sparkle">✦</span>
+                        </div>
+                        <h3>Your assessment starts here</h3>
+                        <p>Enter your assessment details and source material. Review the generated questions before sharing them with students.</p>
+                    </div>
+                </div>
+                <div class="result-footer">
+                    <span class="result-status" id="result-status">Ready to build an assessment</span>
+                    <div class="result-actions">
+                        <label class="answer-key-toggle" id="answer-key-control" hidden>
+                            <input id="include-answer-key" type="checkbox" checked>
+                            <span>Include answer key in PDF</span>
+                        </label>
+                        <button class="download-button" id="download-button" type="button" hidden>Download test PDF</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <footer class="page-footer"><span>Designed to support thoughtful teaching.</span><span>Review all questions and answer keys before use.</span></footer>
+    </main>
+</body>
+</html>
